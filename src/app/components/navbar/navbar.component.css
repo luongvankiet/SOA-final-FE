@@ -1,0 +1,7 @@
+header .navbar .dropdown.show > a.dd-a {
+    color: #0b8890;
+}
+
+.dd-menu.show{
+    margin-top: 17px;
+}

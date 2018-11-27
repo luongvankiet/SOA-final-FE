@@ -1,0 +1,30 @@
+<section class="episodes">
+  <ng-container *ngFor="let item of notify">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-12 pt-5">
+          <h2>{{item.title}}</h2>
+          <p [innerHTML]="item.content"></p>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-2">
+          <h2>Thông tin chi tiết</h2>
+        </div>
+      </div>
+      <div class="row bg-light align-items-center p-4 episode">
+        <div class="col-md-10">
+          <h2><a href="#">{{item.activity.activityContent}}</a></h2>
+          <p>Điểm: {{item.activity.score}}</p>
+          <p>Số lượng đang tham gia: {{item.activity.numberOfJoin}}</p>
+          <p>Số lượng giới hạn: {{item.activity.limitOfJoin}}</p>
+        </div>
+        <div class="col-md-2 text-center">
+          <a href="#" class="play"><span class="ion-ios-play"></span></a>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</section>

@@ -1,0 +1,39 @@
+<section class="episodes">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mb-2">
+        <div class="row d-flex justify-content-between">
+          <div class="col-5">
+            <h2>Hoạt động phong trào</h2>
+          </div>
+          <div class="col-7">
+            <form (ngSubmit)="show()">
+              <div class="form-group row">
+                <label for="staticEmail" class="col-6 col-form text-right">Chọn học kỳ cần xem</label>
+                <div class="col-6">
+                  <select class="form-control" name="semesterID" [(ngModel)]="sem">
+                    <option>Default select</option>
+                    <option *ngFor="let sem of semester" [value]="sem.semesterID">{{sem.semester}} {{sem.years}}</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit"> a</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngFor="let ac of activities; let i = index">
+      <div class="row align-items-center p-4 episode" [ngClass]="(i % 2 == 0) ? 'bg-light':''">
+        <div class="col-md-10">
+          <h2><a href="#">{{ac.activityContent}}</a></h2>
+          <p>Điểm: {{ac.score}}</p>
+          <p>: {{ac.semester.semester}}</p>
+        </div>
+        <div class="col-md-2 text-center">
+          <a href="#" class="play"><span class="ion-ios-play"></span></a>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</section>

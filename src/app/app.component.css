@@ -1,0 +1,18 @@
+.scroll-top-top {
+    background: grey;
+    bottom: 15px;
+    right: 20px;
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display:none; 
+    border-radius: 25%;
+}
+.scroll-top-top i {
+    color: #fff;
+    text-align: center;
+    display: block;
+    font-size: 20px;
+    padding-top: 15px;
+}

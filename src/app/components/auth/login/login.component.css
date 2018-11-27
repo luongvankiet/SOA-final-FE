@@ -1,0 +1,7 @@
+input.ng-invalid {
+    border-left: 2px solid red;
+}
+
+.site-section {
+    margin-top: 100px;
+}
