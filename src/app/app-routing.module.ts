@@ -9,6 +9,7 @@ import { BodyNotificationComponent } from './components/body/body-notification/b
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { BodyNotificationDetailComponent } from './components/body/body-notification-detail/body-notification-detail.component';
 import { BodyActivitiesComponent } from './components/body/body-activities/body-activities.component';
+import { ManageStudentsComponent } from './components/dashboard/manage-students/manage-students.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'tb', pathMatch: 'full' },
@@ -17,11 +18,12 @@ const routes: Routes = [
     children: [
       { path: 'tb', component: BodyNotificationComponent },
       { path: 'tb/:id', component: BodyNotificationDetailComponent },
-      { path: 'hdpt', component: BodyActivitiesComponent }
+      { path: 'hdpt', component: BodyActivitiesComponent },
     ]
   },
+  { path: 'admin', component: ManageStudentsComponent },
   { path: 'login', component: LoginComponent, canActivate: [RedirectIfAuthenticatedService] },
-  { path: '**', component: PageNotFoundComponent}
+  { path: '**', component: PageNotFoundComponent }
 ]
 
 @NgModule({

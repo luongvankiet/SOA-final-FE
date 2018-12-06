@@ -1,0 +1,9 @@
+.list-group-item{
+    padding: 0 0 0 30px;
+    border: none;
+}
+
+p.full {
+    color: white;
+    padding: 3px
+}

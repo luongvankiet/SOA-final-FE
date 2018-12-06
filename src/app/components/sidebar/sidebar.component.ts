@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = JSON.parse(sessionStorage.getItem("user"));
+    this.user = JSON.parse(localStorage.getItem("user"));
     this.authService.user$.subscribe(user => this.user = user);
   }
 

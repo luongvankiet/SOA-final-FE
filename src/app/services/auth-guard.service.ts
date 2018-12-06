@@ -12,7 +12,7 @@ export class AuthGuardService implements CanActivate {
     private router: Router,
     private authService: AuthService
   ) {
-    this.user = JSON.parse(sessionStorage.getItem('user'));
+    this.user = JSON.parse(localStorage.getItem('user'));
     this.authService.user$.subscribe(user => this.user = user);
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {

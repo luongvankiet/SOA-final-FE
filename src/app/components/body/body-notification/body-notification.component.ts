@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class BodyNotificationComponent implements OnInit {
   public notifyObservable: Observable<any>;
   public notification;
+  public isLoading = true;
   constructor(
     private notifyServices: NotificationService,
     private router: Router
@@ -25,9 +26,10 @@ export class BodyNotificationComponent implements OnInit {
     this.notifyObservable
       .subscribe(arg => {
         this.notification = arg;
+        this.isLoading = false;
       });
   }
-  
+
   notifyDetail(item, e: MouseEvent) {
     e.preventDefault();
     this.router.navigate([`tb/${item}`]);

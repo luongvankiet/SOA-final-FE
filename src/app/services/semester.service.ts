@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SemesterService {
-  private apiUrl = "http://localhost:8080/Student_management/services/semester";
+  private apiUrl = "https://soa-final.herokuapp.com/services/semester";
 
   constructor(private http: HttpClient) { }
     

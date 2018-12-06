@@ -1,30 +1,64 @@
-<section class="episodes">
-  <ng-container *ngFor="let item of notify">
-    <div class="container">
-      <div class="row mb-5">
-        <div class="col-md-12 pt-5">
-          <h2>{{item.title}}</h2>
-          <p [innerHTML]="item.content"></p>
+<ng-container *ngIf="isLoading == true; else onLoaded">
+  <app-loading-page></app-loading-page>
+</ng-container>
+<ng-template #onLoaded>
+  <section class="episodes">
+    <ng-container *ngFor="let item of notify">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-12 pt-5">
+            <h2>{{item.title}}</h2>
+            <p [innerHTML]="item.content"></p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 mb-2">
-          <h2>Thông tin chi tiết</h2>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-2">
+            <h2>Thông tin chi tiết</h2>
+          </div>
+        </div>
+        <div class="row bg-light align-items-center p-4 episode">
+          <div class="col-md-10">
+            <h2>{{item.activity.activityContent}}</h2>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item bg-light">Thời gian: {{item.activity.date}}</li>
+              <li class="list-group-item bg-light">Địa điểm: {{item.activity.place}}</li>
+              <li class="list-group-item bg-light">Số lượng đang tham gia: {{item.activity.numberOfJoin}}</li>
+              <li class="list-group-item bg-light">Số lượng giới hạn: {{item.activity.limitOfJoin}}</li>
+            </ul>
+          </div>
+          <div class="col-md-2 text-center" *ngIf="joined == false">
+            <ng-container *ngIf="item.activity.numberOfJoin == item.activity.limitOfJoin; else available">
+              <p class="full">Full</p>
+            </ng-container>
+            <ng-template #available>
+              <a href="#" class="play" (click)="openModal(template, $event)"><span class="ion-ios-play"></span></a>
+            </ng-template>
+          </div>
         </div>
       </div>
-      <div class="row bg-light align-items-center p-4 episode">
-        <div class="col-md-10">
-          <h2><a href="#">{{item.activity.activityContent}}</a></h2>
-          <p>Điểm: {{item.activity.score}}</p>
-          <p>Số lượng đang tham gia: {{item.activity.numberOfJoin}}</p>
-          <p>Số lượng giới hạn: {{item.activity.limitOfJoin}}</p>
+      <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Xác nhận đăng ký tham gia</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div class="col-md-2 text-center">
-          <a href="#" class="play"><span class="ion-ios-play"></span></a>
+        <div class="modal-body">
+          <h5>{{item.activity.activityContent}}</h5>
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item">Thời gian: {{item.activity.date}}</li>
+              <li class="list-group-item">Địa điểm: {{item.activity.place}}</li>
+              <li class="list-group-item">Số lượng đang tham gia: {{item.activity.numberOfJoin}}</li>
+              <li class="list-group-item">Số lượng giới hạn: {{item.activity.limitOfJoin}}</li>
+            </ul>
         </div>
-      </div>
-    </div>
-  </ng-container>
-</section>
+        <div class="modal-footer" style="padding: 10px">
+          <button type="button" class="btn btn-primary" (click)="submitJoin(user, item.activity)">Xác nhận</button>
+          <button type="button" class="btn btn-default" (click)="modalRef.hide()">Hủy</button>
+        </div>
+      </ng-template>
+    </ng-container>
+  </section>
+</ng-template>

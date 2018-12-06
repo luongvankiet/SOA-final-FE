@@ -251,6 +251,25 @@ header .navbar.navbar-light .nav-link.active {
   border-radius: 50%;
 }
 
+.episodes .full {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background: red;
+  border-radius: 50%;
+}
+
+.episodes .full span {
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
 .episodes .play span {
   color: #fff;
   position: absolute;

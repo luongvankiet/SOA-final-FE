@@ -14,6 +14,11 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { BodyNotificationDetailComponent } from './components/body/body-notification-detail/body-notification-detail.component';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { BodyActivitiesComponent } from './components/body/body-activities/body-activities.component';
+import { LoadingPageComponent } from './components/loading-page/loading-page.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ManageStudentsComponent } from './components/dashboard/manage-students/manage-students.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +30,8 @@ import { BodyActivitiesComponent } from './components/body/body-activities/body-
     PageNotFoundComponent,
     BodyNotificationDetailComponent,
     BodyActivitiesComponent,
+    LoadingPageComponent,
+    ManageStudentsComponent,
 
   ],
   imports: [
@@ -32,7 +39,10 @@ import { BodyActivitiesComponent } from './components/body/body-activities/body-
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    SnotifyModule
+    SnotifyModule,
+    TabsModule.forRoot(),
+    ModalModule.forRoot(),
+    Ng2SmartTableModule
   ],
   providers: [
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults },

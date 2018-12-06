@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class NotificationService {
-  private apiUrl = 'http://localhost:8080/Student_management/services/notification';
+  private apiUrl = 'https://soa-final.herokuapp.com/services/notification';
   constructor(
     private http: HttpClient
   ) { }

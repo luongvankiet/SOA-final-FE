@@ -1,39 +1,67 @@
-<section class="episodes">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 mb-2">
-        <div class="row d-flex justify-content-between">
-          <div class="col-5">
-            <h2>Hoạt động phong trào</h2>
-          </div>
-          <div class="col-7">
-            <form (ngSubmit)="show()">
-              <div class="form-group row">
-                <label for="staticEmail" class="col-6 col-form text-right">Chọn học kỳ cần xem</label>
-                <div class="col-6">
-                  <select class="form-control" name="semesterID" [(ngModel)]="sem">
-                    <option>Default select</option>
-                    <option *ngFor="let sem of semester" [value]="sem.semesterID">{{sem.semester}} {{sem.years}}</option>
-                  </select>
-                </div>
+<tabset [justified]="true">
+  <tab heading="Hoạt động ngoại khóa" id="hdpt">
+    <section class="episodes">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mb-2">
+            <div class="row d-flex justify-content-between">
+              <div class="col-5">
+                <h2>Hoạt động phong trào</h2>
               </div>
-              <button type="submit"> a</button>
-            </form>
+              <div class="col-7">
+                <form>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-6 col-form text-right">Chọn học kỳ cần xem</label>
+                    <div class="col-6">
+                      <select class="form-control" name="semesterID" [(ngModel)]="sem" (change)="show($event.target.value)">
+                        <option [value]="undefined">----</option>
+                        <option *ngFor="let sem of semester" [value]="sem.semesterID">{{sem.semester}} {{sem.years}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
+        <ng-container *ngIf="isLoading == true; else onLoaded">
+          <app-loading-page></app-loading-page>
+        </ng-container>
+        <ng-template #onLoaded>
+          <ng-container *ngFor="let activity of activities; let i = index">
+            <div class="row align-items-center p-4 episode" [ngClass]="(i % 2 == 0) ? 'bg-light':''">
+              <div class="col-md-10">
+                <h2>{{activity.activities.activityContent}}</h2>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item" [ngClass]="(i % 2 == 0) ? 'bg-light':''">Thời gian:
+                    {{activity.activities.date}}</li>
+                  <li class="list-group-item" [ngClass]="(i % 2 == 0) ? 'bg-light':''">Địa điểm:
+                    {{activity.activities.place}}</li>
+                  <li class="list-group-item" [ngClass]="(i % 2 == 0) ? 'bg-light':''">Số lượng đang tham gia:
+                    {{activity.activities.numberOfJoin}}</li>
+                  <li class="list-group-item" [ngClass]="(i % 2 == 0) ? 'bg-light':''">Số lượng giới hạn:
+                    {{activity.activities.limitOfJoin}}</li>
+                </ul>
+              </div>
+              <div class="col-md-2 text-center" *ngIf="activity.isJoined == false; else joined">
+                <ng-container *ngIf="activity.activities.numberOfJoin == activity.activities.limitOfJoin; else available">
+                  <a href="#" class="full" (click)="doNotThing($event)"><span class="fas fa-times"></span></a>
+                </ng-container>
+                <ng-template #available>
+                  <a href="#" class="play" (click)="onJoin(activity, $event)"><span class="ion-ios-play"></span></a>
+                </ng-template>
+              </div>
+              <ng-template #joined>
+                <div class="col-md-2 text-center">
+                  <a href="#" class="play" (click)="doNotThing(activity,$event)"><span class="fas fa-check"></span></a>
+                </div>
+              </ng-template>
+            </div>
+          </ng-container>
+        </ng-template>
       </div>
-    </div>
-    <ng-container *ngFor="let ac of activities; let i = index">
-      <div class="row align-items-center p-4 episode" [ngClass]="(i % 2 == 0) ? 'bg-light':''">
-        <div class="col-md-10">
-          <h2><a href="#">{{ac.activityContent}}</a></h2>
-          <p>Điểm: {{ac.score}}</p>
-          <p>: {{ac.semester.semester}}</p>
-        </div>
-        <div class="col-md-2 text-center">
-          <a href="#" class="play"><span class="ion-ios-play"></span></a>
-        </div>
-      </div>
-    </ng-container>
-  </div>
-</section>
+    </section>
+  </tab>
+  <tab heading="Kết quả hooạt động ngoại khóa">
+  </tab>
+</tabset>

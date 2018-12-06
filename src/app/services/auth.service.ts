@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/Student_management/services/auth';
+  private apiUrl = 'https://soa-final.herokuapp.com/services/auth';
   public user$ = new Subject<any>();
   public isLoggedIn$ = new Subject<any>();
   constructor(
@@ -18,10 +18,10 @@ export class AuthService {
 
   userChange(value) {
     if (value == null) {
-      sessionStorage.removeItem('user');
+      localStorage.removeItem('user');
       this.user$.next(value);
     } else {
-      sessionStorage.setItem('user', JSON.stringify(value));
+      localStorage.setItem('user', JSON.stringify(value));
       this.user$.next(value);
     }
   }

@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
     username: null,
     password: null
   }
+  public isLoading;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -23,12 +24,21 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.login(this.form).subscribe(
+    this.isLoading = true;
+    let form = {
+      username: null,
+      password: null
+    }
+    form.username = this.form.username.toLowerCase();
+    form.password = this.form.password;
+    this.authService.login(form).subscribe(
       data => {
         this.handle(data);
+        this.isLoading = false;
       },
       error => {
         this.snotifyService.error('Email or password doesn\'t exist. Please try again !', 'Error');
+        this.isLoading = false;
       });
   }
 
